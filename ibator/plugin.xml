@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IProject"
+            id="ibator.contribution1"
+            adaptable="true">
+         <action
+               label="MyBatis3 Code Generator Tool"
+               class="ibator.popup.actions.RunAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="ibator.newAction"
+               icon="resource/images/ibatis.gif"
+               >
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-Name: Ibator
+Bundle-ClassPath: .,
+ resource/lib/ibatis/log4j.jar,
+ resource/lib/ibatis/mybatis-3.0.5-SNAPSHOT.jar,
+ resource/lib/jdbc/mysql-connector-java-5.1.6-bin.jar,
+ resource/lib/dom4j/dom4j-full.jar
+Bundle-Activator: ibator.Activator
+Bundle-Vendor: www.ibator.com
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: ibator; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.core.resources,or
+ g.eclipse.ui,org.eclipse.jdt.core,org.eclipse.jface.text
+Bundle-Version: 3.1.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+
