@@ -10,7 +10,7 @@ import org.mybatis.generator.api.dom.java.TopLevelClass;
 
 import ibator.Globar;
 
-public class ContrllerGenerator {
+public class ControllerGenerator {
       public boolean createServiceWithSpring(IProject project, String pojo,ServiceInterfaceGenarator serviceInterfaceGenarator){
   		String className = getPackage()+"."+pojo+"Controller";
   		StringBuffer sb = new StringBuffer();

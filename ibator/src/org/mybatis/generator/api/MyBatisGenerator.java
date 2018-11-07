@@ -30,7 +30,7 @@ import org.mybatis.generator.internal.util.ClassloaderUtility;
 import org.mybatis.generator.internal.util.messages.Messages;
 
 import ibator.Globar;
-import ibator.generator.ContrllerGenerator;
+import ibator.generator.ControllerGenerator;
 import ibator.generator.ServiceImplGenerator;
 import ibator.generator.ServiceInterfaceGenarator;
 import ibator.ui.EclipseUI;
@@ -312,7 +312,7 @@ public class MyBatisGenerator
     	  ServiceInterfaceGenarator service = new ServiceInterfaceGenarator();
           Util.createFolder(project, "src/"+service.getPackage().replaceAll("\\.", "/"));
           service.createServiceWithSpring(project, name,table);
-          ContrllerGenerator controller =  new ContrllerGenerator();
+          ControllerGenerator controller =  new ControllerGenerator();
           Util.createFolder(project, "src/"+controller.getPackage().replaceAll("\\.", "/"));
           controller.createServiceWithSpring(project, name, service);
           service = new ServiceImplGenerator();
