@@ -1,5 +1,7 @@
 package ibator.generator;
 
+import java.io.File;
+
 import org.eclipse.core.resources.IProject;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
@@ -13,6 +15,8 @@ import ibator.util.ProjectFileWriteUtil;
 public class ServiceInterfaceGenarator {
 	private String serviceClassName;
 	private IntrospectedTable introspectedTable;
+	private String srcDir;
+	
 	public boolean createServiceWithSpring(IProject project, String pojo,IntrospectedTable introspectedTable) {
 		//String daoName = pojo + Globar.daoName;
 		String className = getPackage()+"."+pojo+"Service";
@@ -151,7 +155,7 @@ public class ServiceInterfaceGenarator {
 	}
 
 	public boolean createFile(String className,IProject project,TopLevelClass topLevelClass){
-		String filename = "src/" + className.replaceAll("\\.", "/") + ".java";
+		String filename = srcDir+ File.separator + className.replaceAll("\\.", "/") + ".java";
 		return ProjectFileWriteUtil.write(project, topLevelClass, filename);
 	}
 
@@ -171,6 +175,14 @@ public class ServiceInterfaceGenarator {
 
 	public void setIntrospectedTable(IntrospectedTable introspectedTable) {
 		this.introspectedTable = introspectedTable;
+	}
+
+	public String getSrcDir() {
+		return srcDir;
+	}
+
+	public void setSrcDir(String srcDir) {
+		this.srcDir = srcDir;
 	}
 
 

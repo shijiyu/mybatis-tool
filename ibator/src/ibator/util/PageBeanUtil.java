@@ -1,5 +1,7 @@
 package ibator.util;
 
+import java.io.File;
+
 import org.eclipse.core.resources.IProject;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
@@ -36,7 +38,7 @@ public class PageBeanUtil
     topLevelClass.addMethod(method);
   }
 
-  public static void getPageBean(IProject project)
+  public static void getPageBean(IProject project,String srcDir)
   {
     StringBuffer sb = new StringBuffer();
 
@@ -53,12 +55,12 @@ public class PageBeanUtil
     addProperty(topLevelClass, "resultList", "java.lang.Object");
 
     sb.setLength(0);
-    sb.append("src/").append(Globar.pojoPath.replaceAll("\\.", "/")).append("/PageBean.java");
+    sb.append(srcDir+File.separator).append(Globar.pojoPath.replaceAll("\\.", "/")).append(File.separator+"PageBean.java");
 
    ProjectFileWriteUtil.write(project, topLevelClass, sb.toString());
-    getResultBean(project);
+    getResultBean(project,srcDir);
   }
-  private static void getResultBean(IProject project)
+  private static void getResultBean(IProject project,String srcDir)
   {
     StringBuffer sb = new StringBuffer();
 
@@ -87,7 +89,7 @@ public class PageBeanUtil
     addProperty(topLevelClass, "message", "java.lang.String");
     addProperty(topLevelClass, "result", "java.lang.Object");
     sb.setLength(0);
-    sb.append("src/").append(Globar.pojoPath.replaceAll("\\.", "/")).append("/ResultVo.java");
+    sb.append(srcDir+File.separator).append(Globar.pojoPath.replaceAll("\\.", "/")).append(File.separator+"ResultVo.java");
     ProjectFileWriteUtil.write(project, topLevelClass, sb.toString());
   }
 }

@@ -289,11 +289,12 @@ public class MyBatisGenerator
       fold2 = project.getFolder("WebContext/WEB-INF");
       //des2 = "WebContext/WEB-INF/";
     }
-
-    Util.createFolder(project, "src/com");
+    String srcPath = dir.getAbsolutePath();
+    String srcDir = srcPath.substring(srcPath.indexOf(project.getName())+project.getName().length()+1,dir.getAbsolutePath().length());
+    Util.createFolder(project, srcDir+File.separator+"com");
 
     if (!Globar.ISSIMPLE) {
-      Util.createFolder(project, "src/com/test");
+      Util.createFolder(project, srcDir+File.separator+"com"+File.separator+"test");
     }
     Util.copyFile("resource/lib/dtd1", "src", false, project);
     String dao = Globar.xmlPath;
@@ -304,22 +305,23 @@ public class MyBatisGenerator
     Util.copyFile("resource/lib/log4j.properties", "src", false, project);
     String pojo = pojos.get(pojos.size()-1);
     if ((Globar.spring) && (!Globar.ISSIMPLE)) {
-      TestFileUtil.createTestFileWithSpring(project, pojo, "src/com/test/TestDAOWithSpring.java");
-      
-      pojos.forEach( name -> {
+      TestFileUtil.createTestFileWithSpring(project, pojo, srcDir+File.separator+"com"+File.separator+"test"+File.separator+"TestDAOWithSpring.java");
+      for(String name:pojos){
     	  GeneratedJavaFile unit = (GeneratedJavaFile) pojoCondition.get(name);
     	  IntrospectedTable table = unit.getIntrospectedTable();
     	  ServiceInterfaceGenarator service = new ServiceInterfaceGenarator();
-          Util.createFolder(project, "src/"+service.getPackage().replaceAll("\\.", "/"));
+    	  service.setSrcDir(srcDir);
+          Util.createFolder(project, srcDir+File.separator+service.getPackage().replaceAll("\\.", "/"));
           service.createServiceWithSpring(project, name,table);
           ControllerGenerator controller =  new ControllerGenerator();
-          Util.createFolder(project, "src/"+controller.getPackage().replaceAll("\\.", "/"));
+          Util.createFolder(project,  srcDir+File.separator+controller.getPackage().replaceAll("\\.","/"));
           controller.createServiceWithSpring(project, name, service);
           service = new ServiceImplGenerator();
-          Util.createFolder(project, "src/"+service.getPackage().replaceAll("\\.", "/"));
+          service.setSrcDir(srcDir);
+          Util.createFolder(project,  srcDir+File.separator+service.getPackage().replaceAll("\\.", "/"));
           service.createServiceWithSpring(project, name,table);
-      });
-      PageBeanUtil.getPageBean(project);
+      }
+      PageBeanUtil.getPageBean(project,srcDir);
     }
     else
     {
